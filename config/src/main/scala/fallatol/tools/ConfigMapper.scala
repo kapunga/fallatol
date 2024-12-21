@@ -1,7 +1,10 @@
 package fallatol.tools
 
-import org.ekrich.config.{Config, ConfigObject, ConfigValue}
+import cats.implicits.toTraverseOps
+import org.ekrich.config.{Config, ConfigList, ConfigObject, ConfigValue}
 import org.ekrich.config.impl.{ConfigBoolean, ConfigDouble, ConfigInt, ConfigLong, ConfigNumber, ConfigString}
+import scala.jdk.CollectionConverters.{ListHasAsScala, SetHasAsScala}
+import scala.util.Try
 
 trait ConfigMapper[A] {
   def get(cv: ConfigValue): Either[Throwable, A]
@@ -45,4 +48,16 @@ object ConfigMapper {
     case cs: ConfigObject => Right(cs.toConfig)
     case cv => Left(new RuntimeException(s"Unexpected Value $cv"))
   }
+
+  implicit def configListMapper[A](implicit cm: ConfigMapper[A]): ConfigMapper[List[A]] = {
+    case cs: ConfigList => Try(cs.asScala.toList).toEither.flatMap(_.traverse(cm.get))
+    case cv => Left(new RuntimeException(s"Unexpected Value $cv"))
+  }
+
+  implicit def configMapMapper[A](implicit cm: ConfigMapper[A]): ConfigMapper[Map[String, A]] =
+    flatMapped[Config, Map[String, A]](conf => {
+      val entries = conf.entrySet.asScala.toList
+
+      entries.traverse(entry => cm.get(entry.getValue).map(entry.getKey -> _)).map(_.toMap)
+    })
 }
