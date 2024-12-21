@@ -1,0 +1,6 @@
+# SBT ignore list
+target/
+
+# IDE ignore list
+.bsp/
+.idea/
