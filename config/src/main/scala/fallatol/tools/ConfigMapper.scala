@@ -25,7 +25,8 @@ object ConfigMapper {
   }
 
   implicit val longConfigMapper: ConfigMapper[Long] = {
-    case cs: ConfigLong => Right(cs.value)
+    case ci: ConfigInt  => Right(ci.value.toLong)
+    case cl: ConfigLong => Right(cl.value)
     case cv => Left(new RuntimeException(s"Unexpected Value $cv"))
   }
 

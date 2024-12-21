@@ -18,6 +18,6 @@ lazy val config = (project in file("config"))
     description := "A collection of Typeclasses and utilities for use with the `sconfig` library",
     startYear := Some(2024),
     moduleName := "fallatol-config",
-    libraryDependencies ++= Libraries.cats ++ Libraries.sconfig
+    libraryDependencies ++= Libraries.cats ++ Libraries.scalaTest ++ Libraries.sconfig
   )
 
