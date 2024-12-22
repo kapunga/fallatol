@@ -5,7 +5,7 @@ import scala.util.Try
 import org.ekrich.config.Config
 
 trait ConfigFetcher[A] {
-  def get(conf: Config, path: String): Either[Throwable, A]
+  def get(conf: Config, path: String): ConfigResult[A]
 }
 
 object ConfigFetcher {

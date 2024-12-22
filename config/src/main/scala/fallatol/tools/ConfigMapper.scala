@@ -8,11 +8,11 @@ import org.ekrich.config.impl._
 import org.ekrich.config.{Config, ConfigList, ConfigObject, ConfigValue}
 
 trait ConfigMapper[A] {
-  def get(cv: ConfigValue): Either[Throwable, A]
+  def get(cv: ConfigValue): ConfigResult[A]
 }
 
 object ConfigMapper {
-  def flatMapped[A, B](f: A => Either[Throwable, B])(implicit
+  def flatMapped[A, B](f: A => ConfigResult[B])(implicit
       acm: ConfigMapper[A]
   ): ConfigMapper[B] =
     cv => acm.get(cv).flatMap(f)
