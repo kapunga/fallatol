@@ -19,38 +19,38 @@ object ConfigMapper {
 
   implicit val stringConfigMapper: ConfigMapper[String] = {
     case cs: ConfigString => Right(cs.value)
-    case cv               => Left(new RuntimeException(s"Unexpected Value $cv"))
+    case cv               => Left(ConfigError.UnexpectedValue(cv))
   }
 
   implicit val intConfigMapper: ConfigMapper[Int] = {
     case cs: ConfigInt => Right(cs.value)
-    case cv            => Left(new RuntimeException(s"Unexpected Value $cv"))
+    case cv            => Left(ConfigError.UnexpectedValue(cv))
   }
 
   implicit val longConfigMapper: ConfigMapper[Long] = {
     case ci: ConfigInt  => Right(ci.value.toLong)
     case cl: ConfigLong => Right(cl.value)
-    case cv             => Left(new RuntimeException(s"Unexpected Value $cv"))
+    case cv             => Left(ConfigError.UnexpectedValue(cv))
   }
 
   implicit val doubleConfigMapper: ConfigMapper[Double] = {
     case cs: ConfigDouble => Right(cs.value)
-    case cv               => Left(new RuntimeException(s"Unexpected Value $cv"))
+    case cv               => Left(ConfigError.UnexpectedValue(cv))
   }
 
   implicit val numberConfigMapper: ConfigMapper[Number] = {
     case cs: ConfigNumber => Right(cs.unwrapped)
-    case cv               => Left(new RuntimeException(s"Unexpected Value $cv"))
+    case cv               => Left(ConfigError.UnexpectedValue(cv))
   }
 
   implicit val booleanConfigMapper: ConfigMapper[Boolean] = {
     case cs: ConfigBoolean => Right(cs.value)
-    case cv => Left(new RuntimeException(s"Unexpected Value $cv"))
+    case cv                => Left(ConfigError.UnexpectedValue(cv))
   }
 
   implicit val configConfigMapper: ConfigMapper[Config] = {
     case cs: ConfigObject => Right(cs.toConfig)
-    case cv               => Left(new RuntimeException(s"Unexpected Value $cv"))
+    case cv               => Left(ConfigError.UnexpectedValue(cv))
   }
 
   implicit def configListMapper[A](implicit
@@ -58,7 +58,7 @@ object ConfigMapper {
   ): ConfigMapper[List[A]] = {
     case cs: ConfigList =>
       Try(cs.asScala.toList).toEither.flatMap(_.traverse(cm.get))
-    case cv => Left(new RuntimeException(s"Unexpected Value $cv"))
+    case cv => Left(ConfigError.UnexpectedValue(cv))
   }
 
   implicit def configMapMapper[A](implicit

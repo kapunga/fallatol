@@ -4,7 +4,7 @@ import cats.implicits.toTraverseOps
 import org.ekrich.config.{Config, ConfigFactory}
 import org.scalatest.flatspec.AnyFlatSpec
 
-class CompositeConfigSuite extends AnyFlatSpec {
+class CompositeConfigSuite extends AnyFlatSpec with TestHelpers {
   val compositeConfig: String =
     """
       |{
@@ -59,6 +59,12 @@ class CompositeConfigSuite extends AnyFlatSpec {
       .flatMap(_.traverse(_.get[Int]("num")))
 
     assert(result == Right(List(1, 2, 3)))
+  }
+
+  "Config Array" should "result in error on incorrect type" in {
+    val result = config.get[List[Int]]("test_string_option_a")
+
+    expectConfigError(result)
   }
 
   "Config Map" should "parse correctly" in {
