@@ -4,3 +4,6 @@ target/
 # IDE ignore list
 .bsp/
 .idea/
+
+# OSX ignore list
+.DS_Store

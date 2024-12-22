@@ -5,6 +5,7 @@ ThisBuild / organization := "org.fallatol"
 ThisBuild / version := "0.1.0-SNAPSHOT"
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
+ThisBuild / coverageEnabled := true
 
 lazy val scalacOpts = List(
   "-Ywarn-unused:imports",
