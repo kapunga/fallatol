@@ -1,7 +1,8 @@
 package fallatol.tools
 
-import org.ekrich.config.Config
 import scala.util.Try
+
+import org.ekrich.config.Config
 
 trait ConfigFetcher[A] {
   def get(conf: Config, path: String): Either[Throwable, A]

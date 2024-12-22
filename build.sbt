@@ -3,6 +3,13 @@ import Dependencies.Libraries
 ThisBuild / scalaVersion := "2.13.15"
 ThisBuild / organization := "org.fallatol"
 ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / semanticdbEnabled := true
+ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
+
+lazy val scalacOpts = List(
+  "-Ywarn-unused:imports",
+  "-Xsource:3"
+)
 
 lazy val root = (project in file("."))
   .settings(
@@ -18,6 +25,7 @@ lazy val config = (project in file("config"))
     description := "A collection of Typeclasses and utilities for use with the `sconfig` library",
     startYear := Some(2024),
     moduleName := "fallatol-config",
-    libraryDependencies ++= Libraries.cats ++ Libraries.scalaTest ++ Libraries.sconfig
+    libraryDependencies ++= Libraries.cats ++ Libraries.scalaTest ++ Libraries.sconfig,
+    scalacOptions ++= scalacOpts
   )
 

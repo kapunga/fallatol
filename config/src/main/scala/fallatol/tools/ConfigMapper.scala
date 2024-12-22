@@ -1,17 +1,11 @@
 package fallatol.tools
 
-import cats.implicits.toTraverseOps
-import org.ekrich.config.{Config, ConfigList, ConfigObject, ConfigValue}
-import org.ekrich.config.impl.{
-  ConfigBoolean,
-  ConfigDouble,
-  ConfigInt,
-  ConfigLong,
-  ConfigNumber,
-  ConfigString
-}
 import scala.jdk.CollectionConverters.{ListHasAsScala, SetHasAsScala}
 import scala.util.Try
+
+import cats.implicits.toTraverseOps
+import org.ekrich.config.impl._
+import org.ekrich.config.{Config, ConfigList, ConfigObject, ConfigValue}
 
 trait ConfigMapper[A] {
   def get(cv: ConfigValue): Either[Throwable, A]
