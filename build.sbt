@@ -7,11 +7,6 @@ ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 ThisBuild / coverageEnabled := true
 
-lazy val scalacOpts = List(
-  "-Ywarn-unused:imports",
-  "-Xsource:3"
-)
-
 lazy val root = (project in file("."))
   .settings(
     publish / skip := true,
@@ -26,7 +21,6 @@ lazy val config = (project in file("config"))
     description := "A collection of Typeclasses and utilities for use with the `sconfig` library",
     startYear := Some(2024),
     moduleName := "fallatol-config",
-    libraryDependencies ++= Libraries.cats ++ Libraries.scalaTest ++ Libraries.sconfig,
-    scalacOptions ++= scalacOpts
+    libraryDependencies ++= Libraries.cats ++ Libraries.scalaTest ++ Libraries.sconfig
   )
 

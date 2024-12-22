@@ -105,8 +105,10 @@ class BasicConfigSuite extends AnyFlatSpec with TestHelpers {
   "Config config field" should "parse correctly" in {
     val result = config.get[Config]("test_config")
 
-    assert(result.flatMap(_.get[String]("foo")) == Right("bar"))
-    assert(result.flatMap(_.get[Int]("meaning_of_life")) == Right(42))
+    assert(
+      result.flatMap(_.get[String]("foo")) == Right("bar") &&
+        result.flatMap(_.get[Int]("meaning_of_life")) == Right(42)
+    )
   }
 
   "Config config field" should "result in  error on incorrect type" in {
