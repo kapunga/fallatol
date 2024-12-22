@@ -9,7 +9,7 @@ class BasicConfigSuite extends AnyFlatSpec {
       |{
       |  test_string = "foobar"
       |  test_int = 42
-      |  test_long = 1234567890
+      |  test_long = 9876543210
       |  test_double = 1.234
       |  test_boolean = true
       |  test_config {
@@ -36,7 +36,13 @@ class BasicConfigSuite extends AnyFlatSpec {
   "Long config field" should "parse correctly" in {
     val result = config.get[Long]("test_long")
 
-    assert(result == Right(1234567890L))
+    assert(result == Right(9876543210L))
+  }
+
+  "Long config field" should "parse int correctly" in {
+    val result = config.get[Long]("test_int")
+
+    assert(result == Right(42L))
   }
 
   "Double config field" should "parse correctly" in {
