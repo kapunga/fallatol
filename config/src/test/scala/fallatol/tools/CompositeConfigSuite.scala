@@ -54,7 +54,8 @@ class CompositeConfigSuite extends AnyFlatSpec {
   }
 
   "Config Array of Configs" should "parse correctly" in {
-    val result = config.get[List[Config]]("test_config_array")
+    val result = config
+      .get[List[Config]]("test_config_array")
       .flatMap(_.traverse(_.get[Int]("num")))
 
     assert(result == Right(List(1, 2, 3)))
@@ -63,10 +64,14 @@ class CompositeConfigSuite extends AnyFlatSpec {
   "Config Map" should "parse correctly" in {
     val result = config.get[Map[String, Int]]("test_config_map")
 
-    assert(result == Right(Map(
-      "foo" -> 1,
-      "bar" -> 2,
-      "baz" -> 3
-    )))
+    assert(
+      result == Right(
+        Map(
+          "foo" -> 1,
+          "bar" -> 2,
+          "baz" -> 3
+        )
+      )
+    )
   }
 }
