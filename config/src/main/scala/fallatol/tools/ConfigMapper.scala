@@ -4,8 +4,8 @@ import scala.jdk.CollectionConverters.{ListHasAsScala, SetHasAsScala}
 import scala.util.Try
 
 import cats.implicits.toTraverseOps
+import org.ekrich.config._
 import org.ekrich.config.impl._
-import org.ekrich.config.{Config, ConfigList, ConfigObject, ConfigValue}
 
 trait ConfigMapper[A] {
   def get(cv: ConfigValue): ConfigResult[A]
