@@ -1,6 +1,6 @@
 package fallatol.tools
 
-import scala.jdk.CollectionConverters.{ListHasAsScala, SetHasAsScala}
+import scala.jdk.CollectionConverters.{ ListHasAsScala, SetHasAsScala }
 import scala.util.Try
 
 import cats.implicits.toTraverseOps

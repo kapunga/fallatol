@@ -1,7 +1,7 @@
 package fallatol.tools
 
 import cats.implicits.toTraverseOps
-import org.ekrich.config.{Config, ConfigFactory}
+import org.ekrich.config.{ Config, ConfigFactory }
 import org.scalatest.flatspec.AnyFlatSpec
 
 class CompositeConfigSuite extends AnyFlatSpec with TestHelpers {

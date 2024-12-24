@@ -1,6 +1,6 @@
 package fallatol.tools
 
-import org.ekrich.config.{Config, ConfigFactory}
+import org.ekrich.config.{ Config, ConfigFactory }
 import org.scalatest.flatspec.AnyFlatSpec
 
 class BasicConfigSuite extends AnyFlatSpec with TestHelpers {
