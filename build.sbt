@@ -28,8 +28,10 @@ lazy val root = (project in file("."))
       name := "fallatol",
       crossScalaVersions := Nil,
       description := "A collection of Thor's micro-libraries.",
-      startYear := Some(2024)
+      startYear := Some(2024),
+      Laika / sourceDirectories := Seq(file("docs"))
     )
+    .enablePlugins(LaikaPlugin)
     .aggregate(
       config.js,
       config.jvm,
