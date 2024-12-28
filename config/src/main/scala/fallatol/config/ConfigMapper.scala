@@ -2,11 +2,12 @@ package fallatol.config
 
 import scala.jdk.CollectionConverters._
 import scala.util.Try
-
 import cats.implicits.toTraverseOps
 import org.ekrich.config._
 import org.ekrich.config.impl._
+import scala.annotation.implicitNotFound
 
+@implicitNotFound("Could not find a ConfigMapper for type '${A}'. You may have to define one.")
 trait ConfigMapper[A] {
   def get(cv: ConfigValue): ConfigResult[A]
 }
