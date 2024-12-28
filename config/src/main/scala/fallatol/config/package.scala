@@ -6,8 +6,8 @@ package object config {
   type ConfigResult[T] = Either[Throwable, T]
 
   implicit class ConfigOps(config: Config) {
-    def get[A](path: String)(implicit
-        cf: ConfigFetcher[A]
+    final def get[A](path: String)(implicit
+        cf: ConfigGetter[A]
     ): ConfigResult[A] =
       cf.get(config, path)
   }

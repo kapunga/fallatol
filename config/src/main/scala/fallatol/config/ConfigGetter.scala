@@ -4,19 +4,19 @@ import scala.util.Try
 
 import org.ekrich.config.Config
 
-trait ConfigFetcher[A] {
+private[config] trait ConfigGetter[A] {
   def get(conf: Config, path: String): ConfigResult[A]
 }
 
-object ConfigFetcher {
+private[config] object ConfigGetter {
   implicit def forConfigMapped[A](implicit
       cm: ConfigMapper[A]
-  ): ConfigFetcher[A] =
+  ): ConfigGetter[A] =
     (conf, path) => Try(conf.getValue(path)).toEither.flatMap(cm.get)
 
   implicit def optionConfigFetcher[A](implicit
-      cf: ConfigFetcher[A]
-  ): ConfigFetcher[Option[A]] =
+      cf: ConfigGetter[A]
+  ): ConfigGetter[Option[A]] =
     (conf, path) => {
       if (conf.hasPath(path) && !conf.getIsNull(path))
         cf.get(conf, path).map(Option.apply)
