@@ -2,7 +2,7 @@ package fallatol
 
 import org.ekrich.config.Config
 
-package object tools {
+package object config {
   type ConfigResult[T] = Either[Throwable, T]
 
   implicit class ConfigOps(config: Config) {

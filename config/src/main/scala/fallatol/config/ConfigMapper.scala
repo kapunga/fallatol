@@ -1,4 +1,4 @@
-package fallatol.tools
+package fallatol.config
 
 import scala.jdk.CollectionConverters._
 import scala.util.Try

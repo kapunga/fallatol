@@ -1,4 +1,4 @@
-package fallatol.tools
+package fallatol.config
 
 import org.ekrich.config.{ Config, ConfigFactory }
 import org.scalatest.flatspec.AnyFlatSpec

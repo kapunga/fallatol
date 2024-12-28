@@ -1,4 +1,4 @@
-package fallatol.tools
+package fallatol.config
 
 import cats.implicits.toTraverseOps
 import org.ekrich.config.{ Config, ConfigFactory }

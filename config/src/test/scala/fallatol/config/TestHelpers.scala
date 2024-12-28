@@ -1,4 +1,4 @@
-package fallatol.tools
+package fallatol.config
 
 import org.scalatest.Assertions.fail
 
