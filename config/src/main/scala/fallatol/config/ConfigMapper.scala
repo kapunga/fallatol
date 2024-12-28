@@ -40,8 +40,9 @@ trait ConfigMapper[A] {
 object ConfigMapper {
 
   /** Create a [[ConfigMapper]] for type [[B]] by providing a function mapping
-   * type [[A]], with a defined [[ConfigMapper]] to [[ConfigResult]] of type [[B]].
-   */
+    * type [[A]], with a defined [[ConfigMapper]] to [[ConfigResult]] of type
+    * [[B]].
+    */
   def from[A, B](f: A => ConfigResult[B])(implicit
       acm: ConfigMapper[A]
   ): ConfigMapper[B] = cv => acm.get(cv).flatMap(f)
