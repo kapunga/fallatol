@@ -1,4 +1,5 @@
 import Dependencies.Libraries
+import laika.config.{MessageFilter, MessageFilters}
 
 val scala212 = "2.12.20"
 val scala213 = "2.13.15"
@@ -29,7 +30,9 @@ lazy val root = (project in file("."))
       crossScalaVersions := Nil,
       description := "A collection of Thor's micro-libraries.",
       startYear := Some(2024),
-      Laika / sourceDirectories := Seq(file("docs"))
+      Laika / sourceDirectories := Seq(file("docs")),
+      laikaSite / target := file("site"),
+      laikaConfig := LaikaConfig.defaults.withMessageFilters(MessageFilters.custom(failOn = MessageFilter.None, render = MessageFilter.Debug))
     )
     .enablePlugins(LaikaPlugin)
     .aggregate(
