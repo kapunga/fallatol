@@ -4,20 +4,26 @@ _Note: This is very much a work in progress._
 
 ## Quickstart
 `fallatol-config` is not published yet, so you will need to build locally. First run:
+
 ```bash
 fallatol git:(main) sbt publishLocal
 ```
+
 Then add to your dependencies:
+
 ```sbt
  libraryDependencies += "org.fallatol" %% "fallatol-config" % "0.1.0-SNAPSHOT"
 ```
+
 `fallatol-config` works with [`sconfig`](https://github.com/ekrich/sconfig/) so you may also want to add it to your dependencies as well:
+
 ```sbt
 libraryDependencies += "org.ekrich" %% "sconfig" % "1.8.1"
 ```
 
 ### Example Usage
 The example uses the following `application.conf` file:
+
 ```hocon
 origin {
   airport_code = "BOS"
@@ -31,11 +37,12 @@ destination {
 ```
 
 Example:
+
 ```scala
 import fallatol.config._
 import org.ekrich.config._
 
-def loadConfig: ConfigResult[(String, String)] = {
+def loadConfig = {
   val config = ConfigFactory.load()
   
   for {
@@ -46,6 +53,7 @@ def loadConfig: ConfigResult[(String, String)] = {
 ```
 
 Example with custom `ConfigMapper` for a case class:
+
 ```scala
 import fallatol.config._
 import org.ekrich.config._
