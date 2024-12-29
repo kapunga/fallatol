@@ -1,4 +1,6 @@
 import Dependencies.Libraries
+import laika.config.{MessageFilter, MessageFilters, SyntaxHighlighting}
+import laika.format.Markdown
 
 val scala212 = "2.12.20"
 val scala213 = "2.13.15"
@@ -28,8 +30,12 @@ lazy val root = (project in file("."))
       name := "fallatol",
       crossScalaVersions := Nil,
       description := "A collection of Thor's micro-libraries.",
-      startYear := Some(2024)
+      startYear := Some(2024),
+      laikaExtensions ++= Seq(Markdown.GitHubFlavor, SyntaxHighlighting),
+      Laika / sourceDirectories := Seq(file("docs")),
+      laikaSite / target := file("site")
     )
+    .enablePlugins(LaikaPlugin)
     .aggregate(
       config.js,
       config.jvm,

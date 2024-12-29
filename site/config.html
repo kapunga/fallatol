@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Typelevel Laika + Helium Theme" />
+  <title>Fallatól Config</title>
+  
+  
+  <meta name="description" content="A collection of Thor's micro-libraries."/>
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:500">
+  
+  <link rel="stylesheet" type="text/css" href="helium/site/icofont.min.css" />
+    <link rel="stylesheet" type="text/css" href="helium/site/laika-helium.css" />
+  <script src="helium/site/laika-helium.js"></script>
+  
+  
+  <script> /* for avoiding page load transitions */ </script>
+</head>
+
+  <body>
+
+    <header id="top-bar" class="light-default dark-default">
+
+  <div class="row">
+    <a id="nav-icon">
+      <i class="icofont-laika navigationMenu" title="Navigation">&#xefa2;</i>
+    </a>
+    
+    
+  </div>
+
+  <a class="icon-link glyph-link" href="index.html"><i class="icofont-laika home" title="Home">&#xef47;</i></a>
+
+  <div class="row links">
+    
+  </div>  
+
+</header>
+    
+    <nav id="sidebar">
+
+  <div class="row">
+    
+  </div>
+
+  <ul class="nav-list">
+    <li class="level1 active nav-leaf"><a href="#">Fallatól Config</a></li>
+  </ul>
+
+</nav>
+
+    <div id="container">
+
+      
+<nav id="page-nav">
+  <p class="header"><a href="#">Fallatól Config</a></p>
+
+  <ul class="nav-list">
+    <li class="level1 nav-node"><a href="#quickstart">Quickstart</a></li>
+    <li class="level2 nav-leaf"><a href="#example-usage">Example Usage</a></li>
+  </ul>
+
+  <p class="footer"></p>
+</nav>
+
+
+      <main class="content">
+
+        <h1 id="fallatól-config" class="title">Fallatól Config</h1>
+        <p><em>Note: This is very much a work in progress.</em></p>
+        
+        <h2 id="quickstart" class="section"><a class="anchor-link left" href="#quickstart"><i class="icofont-laika link">&#xef71;</i></a>Quickstart</h2>
+        <p><code>fallatol-config</code> is not published yet, so you will need to build locally. First run:
+        <code>bash
+fallatol git:(main) sbt publishLocal</code>
+        Then add to your dependencies:
+        <code>sbt
+ libraryDependencies += &quot;org.fallatol&quot; %% &quot;fallatol-config&quot; % &quot;0.1.0-SNAPSHOT&quot;</code>
+        <code>fallatol-config</code> works with <a href="https://github.com/ekrich/sconfig/"><code>sconfig</code></a> so you may also want to add it to your dependencies as well:
+        <code>sbt
+libraryDependencies += &quot;org.ekrich&quot; %% &quot;sconfig&quot; % &quot;1.8.1&quot;</code></p>
+        
+        <h3 id="example-usage" class="section"><a class="anchor-link left" href="#example-usage"><i class="icofont-laika link">&#xef71;</i></a>Example Usage</h3>
+        <p>The example uses the following <code>application.conf</code> file:
+        ```hocon
+        origin {
+          airport<em>code = &quot;BOS&quot;
+          airport</em>name = &quot;Boston Logan International Airport&quot;
+        }</p>
+        <p>destination {
+          airport<em>code = &quot;KEF&quot;
+          airport</em>name = &quot;Keflavíkurflugvöllur&quot;
+        }
+        ```</p>
+        <p>Example:
+        ```scala
+        package example</p>
+        <p>import fallatol.config._
+        import org.ekrich.config._</p>
+        <p>def loadConfig: ConfigResult<span class="inline error"><span class="runtime-message error">unresolved link id reference: (string, string)</span><code>[(String, String)]</code></span> = {
+          val config = ConfigFactory.load()</p>
+        <p>for {
+            origin &lt;- config.get<span class="inline error"><span class="runtime-message error">unresolved internal reference: &quot;origin.airport_code&quot;</span><code>[String](&quot;origin.airport_code&quot;)</code></span>
+            destination &lt;- config.get<span class="inline error"><span class="runtime-message error">unresolved internal reference: &quot;destination.airport_code&quot;</span><code>[String](&quot;destination.airport_code&quot;)</code></span>
+          } yield (origin, destination)
+        }
+        ```</p>
+        <p>Example with custom <code>ConfigMapper</code> for a case class:
+        ```scala
+        package example</p>
+        <p>import fallatol.config._
+        import org.ekrich.config._</p>
+        <p>case class Airport(code: String, name: String)</p>
+        <p>object Airport {
+          implicit val airportConfigMapper: ConfigMapper<span class="inline error"><span class="runtime-message error">unresolved link id reference: airport</span><code>[Airport]</code></span> =
+            ConfigMapper.from<span class="inline error"><span class="runtime-message error">unresolved link id reference: config, aiport</span><code>[Config, Aiport]</code></span>(config =&gt;
+              for {
+                code &lt;- config.get<span class="inline error"><span class="runtime-message error">unresolved internal reference: &quot;code&quot;</span><code>[String](&quot;code&quot;)</code></span>
+                name &lt;- config.get<span class="inline error"><span class="runtime-message error">unresolved internal reference: &quot;name&quot;</span><code>[String](&quot;name&quot;)</code></span>
+              } yield Airport(code, name))
+        }</p>
+        <p>def loadConfig: ConfigResult<span class="inline error"><span class="runtime-message error">unresolved link id reference: (aiport, aiport)</span><code>[(Aiport, Aiport)]</code></span> = {
+          val config = ConfigFactory.load()</p>
+        <p>for {
+            origin &lt;- config.get<span class="inline error"><span class="runtime-message error">unresolved internal reference: &quot;origin&quot;</span><code>[Airport](&quot;origin&quot;)</code></span>
+            destination &lt;- config.get<span class="inline error"><span class="runtime-message error">unresolved internal reference: &quot;destination&quot;</span><code>[Airport](&quot;destination&quot;)</code></span>
+          } yield (origin, destination)
+        }
+        ```</p>
+
+        
+<hr class="footer-rule"/>
+<footer>
+  Site generated by <a href="https://typelevel.org/Laika/">Laika</a> with the Helium theme.
+</footer>
+
+
+      </main>
+
+    </div>
+
+  </body>
+
+</html>
