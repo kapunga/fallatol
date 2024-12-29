@@ -1,5 +1,5 @@
 import Dependencies.Libraries
-import laika.config.{MessageFilter, MessageFilters, SyntaxHighlighting}
+import laika.config.SyntaxHighlighting
 import laika.format.Markdown
 
 val scala212 = "2.12.20"
@@ -46,7 +46,7 @@ lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Pure)
   .in(file("config"))
   .settings(
-    description := "A collection of Typeclasses and utilities for use with the `sconfig` library",
+    description := "A collection of Type classes and utilities for use with the `sconfig` library",
     startYear := Some(2024),
     moduleName := "fallatol-config",
     libraryDependencies ++= Libraries.cats ++ Libraries.scalaTest ++ Libraries.sconfig
