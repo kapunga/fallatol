@@ -8,12 +8,12 @@ val scala3 = "3.3.4"
 val scalaVersions = Seq(scala212, scala213, scala3)
 
 ThisBuild / scalaVersion := scala213
-ThisBuild / organization := "org.fallatol"
+ThisBuild / organization := "org.kapunga"
 ThisBuild / version := "0.1.0-SNAPSHOT"
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 ThisBuild / coverageEnabled := true
-ThisBuild / homepage := Some(url("https://github.com/kapunga/fallatol"))
+ThisBuild / homepage := Some(url("https://kapunga.github.io/fallatol"))
 ThisBuild / licenses := List("MIT" -> url("https://opensource.org/license/mit"))
 ThisBuild / developers := List(
   Developer(
