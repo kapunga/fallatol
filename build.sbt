@@ -9,7 +9,6 @@ val scalaVersions = Seq(scala212, scala213, scala3)
 
 ThisBuild / scalaVersion := scala213
 ThisBuild / organization := "org.kapunga"
-ThisBuild / version := "0.1.0-SNAPSHOT"
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 ThisBuild / coverageEnabled := true
