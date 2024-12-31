@@ -8,10 +8,9 @@ import cats.implicits.toTraverseOps
 import org.ekrich.config._
 import org.ekrich.config.impl._
 
-/** The core type class for fallatol-config. It describes how an instance of
-  * some type obtained from an instance of [[org.ekrich.config.ConfigValue]].
-  * Instances of this type class are used by [[ConfigOps]] which allows getting
-  * of instances from [[org.ekrich.config.Config]] via type parameters like:
+/** The core type class for fallatol-config. It describes how an instance of some type obtained from
+  * an instance of `org.ekrich.impl.ConfigValue`. Instances of this type class are used by [[ConfigOps]]
+  * which allows getting of instances from `org.ekrich.config.Config` via type parameters like:
   * {{{
   *    config.get[Double]("path.to.double")
   * }}}
@@ -27,21 +26,17 @@ trait ConfigMapper[A] {
   def get(cv: ConfigValue): ConfigResult[A]
 }
 
-/** Contains basic [[ConfigMapper]] instances for types are obtainable out of
-  * the box by the [[https://github.com/ekrich/sconfig/ sconfig]] library. This
-  * includes some primitives like [[String]], [[Int]], [[Long]], [[Double]],
-  * [[Number]], and [[Boolean]], as well as [[org.ekrich.config.Config]], which
-  * is used for nested configuration, as well as [[ConfigMapper]]s for [[List]]
-  * and [[Map]] with [[String]] keys.
+/** Contains basic [[ConfigMapper]] instances for types are obtainable out of the box by the
+  * [[https://github.com/ekrich/sconfig/ sconfig]] library. This includes some primitives like
+  * `String`, `Int`, `Long`, `Double`, `Number`, and `Boolean`, as well as `org.ekrich.config.Config`,
+  * which is used for nested configuration, as well as [[ConfigMapper]]s for `List` and `Map` with `String` keys.
   *
-  * Also has the [[from]] method for building a new [[ConfigMapper]] from an
-  * existing [[ConfigMapper]].
+  * Also has the [[from]] method for building a new [[ConfigMapper]] from an existing [[ConfigMapper]].
   */
 object ConfigMapper {
 
-  /** Create a [[ConfigMapper]] for type [[B]] by providing a function mapping
-    * type [[A]], with a defined [[ConfigMapper]] to [[ConfigResult]] of type
-    * [[B]].
+  /** Create a [[ConfigMapper]] for type B by providing a function mapping
+    * type A, with a defined [[ConfigMapper]] to [[ConfigResult]] of type B.
     */
   def from[A, B](f: A => ConfigResult[B])(implicit
       acm: ConfigMapper[A]
