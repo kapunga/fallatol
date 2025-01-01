@@ -58,7 +58,10 @@ lazy val root = (project in file("."))
   .aggregate(
     config.js,
     config.jvm,
-    config.native
+    config.native,
+    ollama.js,
+    ollama.jvm,
+    ollama.native
   )
 
 lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
@@ -75,6 +78,26 @@ lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   )
   .jvmSettings(
     crossScalaVersions := scalaVersions
+  )
+  .nativeSettings(
+    crossScalaVersions := scalaVersions
+  )
+
+lazy val ollama = crossProject(JSPlatform, JVMPlatform, NativePlatform)
+  .crossType(CrossType.Pure)
+  .in(file("ollama"))
+  .settings(
+    description := "A connector for ollama",
+    startYear := Some(2024),
+    moduleName := "fallatol-ollama",
+    libraryDependencies ++= Libraries.circe
+  )
+  .dependsOn(config)
+  .jsSettings(
+    crossScalaVersions := scalaVersions,
+  )
+  .jvmSettings(
+    crossScalaVersions := scalaVersions,
   )
   .nativeSettings(
     crossScalaVersions := scalaVersions
