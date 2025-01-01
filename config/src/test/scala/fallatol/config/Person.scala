@@ -8,5 +8,6 @@ object Person {
       for {
         name <- config.get[String]("name")
         age <- config.get[Int]("age")
-      } yield Person(name, age))
+      } yield Person(name, age)
+    )
 }
