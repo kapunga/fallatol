@@ -8,6 +8,10 @@ class CompositeConfigSuite extends AnyFlatSpec with TestHelpers {
   val compositeConfig: String =
     """
       |{
+      |  test_person = {
+      |    name = "Bilbo"
+      |    age = 111
+      |  }
       |  test_string_option_a = "foobar"
       |  test_string_option_b = null
       |  test_int_array = [1, 2, 3]
@@ -24,10 +28,23 @@ class CompositeConfigSuite extends AnyFlatSpec with TestHelpers {
       |    bar = 2
       |    baz = 3
       |  }
+      |  test_config_person_array = [{
+      |    name = "Alice"
+      |    age = 37
+      |  }, {
+      |    name = "Bob"
+      |    age = 42
+      |  }]
       |}
       |""".stripMargin
 
   lazy val config: Config = ConfigFactory.parseString(compositeConfig)
+
+  "Case class" should "parse correctly" in {
+    val result = config.get[Person]("test_person")
+
+    assert(result == Right(Person("Bilbo", 111)))
+  }
 
   "Optional Config Some" should "parse as Some" in {
     val result = config.get[Option[String]]("test_string_option_a")
@@ -51,6 +68,12 @@ class CompositeConfigSuite extends AnyFlatSpec with TestHelpers {
     val result = config.get[List[Int]]("test_int_array")
 
     assert(result == Right(List(1, 2, 3)))
+  }
+
+  "Config Array of case classes" should "parse correctly" in {
+    val result = config.get[List[Person]]("test_config_person_array")
+
+    assert(result == Right(List(Person("Alice", 37), Person("Bob", 42))))
   }
 
   "Config Array of Configs" should "parse correctly" in {
