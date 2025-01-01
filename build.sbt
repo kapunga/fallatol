@@ -31,7 +31,8 @@ lazy val root = (project in file("."))
       description := "A collection of Thor's micro-libraries.",
       startYear := Some(2024),
       laikaExtensions ++= Seq(Markdown.GitHubFlavor, SyntaxHighlighting),
-      Laika / sourceDirectories := Seq(file("raw-docs")),
+      // Raw site files are `site-docs` since GitHub pages reads from `docs`
+      Laika / sourceDirectories := Seq(file("site-docs")),
       laikaSite / target := file("docs")
     )
     .enablePlugins(LaikaPlugin)
