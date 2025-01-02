@@ -1,6 +1,9 @@
 import Dependencies.Libraries
-import laika.config.SyntaxHighlighting
+import laika.config.{LinkConfig, SourceLinks, SyntaxHighlighting}
 import laika.format.Markdown
+import laika.helium.Helium
+import laika.helium.config.{HeliumIcon, IconLink}
+import laika.theme.ThemeProvider
 
 val scala212 = "2.12.20"
 val scala213 = "2.13.15"
@@ -23,6 +26,17 @@ ThisBuild / developers := List(
   )
 )
 
+lazy val helium: ThemeProvider = Helium.defaults
+  .all.metadata(
+    title = Some("Fallatól"),
+    language = Some("en")
+  )
+  .site.topNavigationBar(
+    navLinks = Seq(
+      IconLink.external("https://github.com/kapunga/fallatol", HeliumIcon.github),
+    )
+  ).build
+
 lazy val root = (project in file("."))
     .settings(
       publish / skip := true,
@@ -31,8 +45,10 @@ lazy val root = (project in file("."))
       description := "A collection of Thor's micro-libraries.",
       startYear := Some(2024),
       laikaExtensions ++= Seq(Markdown.GitHubFlavor, SyntaxHighlighting),
-      Laika / sourceDirectories := Seq(file("raw-docs")),
-      laikaSite / target := file("docs")
+      // Raw site files are `site-docs` since GitHub pages reads from `docs`
+      Laika / sourceDirectories := Seq(file("site-docs")),
+      laikaSite / target := file("docs"),
+      laikaTheme := helium
     )
     .enablePlugins(LaikaPlugin)
     .aggregate(
