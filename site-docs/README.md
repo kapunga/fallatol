@@ -3,8 +3,6 @@
 A collection of [Kapunga's](https://github.com/kapunga) personal micro-libraries. Cross build where possible to all
 Scala platforms (**JVM**, **JS**, and **Native**) for Scala versions **2.12**, **2.13**, and **3**.
 
-Main documentation for these libraries is located [here](https://fallatol.kapunga.org).
-
 ## What are these Micro-Libraries?
 
 Fallatól is a collection of micro-libraries stemming from patterns I've found myself repeating over and over when I
