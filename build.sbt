@@ -54,7 +54,9 @@ lazy val root = (project in file("."))
     .aggregate(
       config.js,
       config.jvm,
-      config.native
+      config.native,
+      prototype.js,
+      prototype.jvm
     )
 
 lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
@@ -76,3 +78,19 @@ lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     crossScalaVersions := scalaVersions
   )
 
+// Currently can't support native because of CE3 lack of support for Scala Native 0.5
+lazy val prototype = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Pure)
+  .in(file("prototype"))
+  .settings(
+    description := "Tools for prototyping",
+    startYear := Some(2025),
+    moduleName := "fallatol-prototype",
+    libraryDependencies ++= Libraries.cats ++ Libraries.catsEffect ++ Libraries.circe ++ Libraries.fs2 ++ Libraries.scalaTest ++ Libraries.sconfig
+  )
+  .jsSettings(
+    crossScalaVersions := scalaVersions,
+  )
+  .jvmSettings(
+    crossScalaVersions := scalaVersions,
+  )
