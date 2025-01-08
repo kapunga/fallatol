@@ -8,6 +8,7 @@ class BasicConfigSuite extends AnyFlatSpec with TestHelpers {
     """
       |{
       |  test_string = "foobar"
+      |  test_string_2 = null
       |  test_int = 42
       |  test_long = 9876543210
       |  test_double = 1.234
@@ -115,5 +116,23 @@ class BasicConfigSuite extends AnyFlatSpec with TestHelpers {
     val result = config.get[Config]("test_string")
 
     expectConfigError(result)
+  }
+
+  "ConfigOps.getOrElse" should "get correctly when value is present" in {
+    val result = config.getOrElse[String]("test_string", "baz")
+
+    assert(result == Right("foobar"))
+  }
+
+  "ConfigOps.getOrElse" should "fallback to default when value is null" in {
+    val result = config.getOrElse[String]("test_string_2", "baz")
+
+    assert(result == Right("baz"))
+  }
+
+  "ConfigOps.getOrElse" should "fallback to default when value is absent" in {
+    val result = config.getOrElse[String]("test_string_3", "baz")
+
+    assert(result == Right("baz"))
   }
 }

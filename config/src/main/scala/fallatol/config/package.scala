@@ -23,7 +23,7 @@ import org.ekrich.config.Config
   */
 package object config {
 
-  /** Type alias for */
+  /** Type alias for config parsing returning either */
   type ConfigResult[T] = Either[Throwable, T]
 
   implicit class ConfigOps(config: Config) {
@@ -31,5 +31,12 @@ package object config {
         cf: ConfigGetter[A]
     ): ConfigResult[A] =
       cf.get(config, path)
+
+    final def getOrElse[A](path: String, default: A)(implicit
+        cf: ConfigGetter[A]
+    ): ConfigResult[A] = {
+      if (config.hasPath(path) && !config.getIsNull(path)) cf.get(config, path)
+      else Right(default)
+    }
   }
 }
