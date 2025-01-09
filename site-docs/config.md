@@ -57,7 +57,7 @@ case class Airport(code: String, name: String)
 
 object Airport {
   implicit val airportConfigMapper: ConfigMapper[Airport] =
-    ConfigMapper.from[Config, Aiport](config =>
+    ConfigMapper.fromConfig(config =>
       for {
         code <- config.get[String]("code")
         name <- config.get[String]("name")
