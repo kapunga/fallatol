@@ -10,4 +10,12 @@ trait TestHelpers {
       case Right(value) => fail(s"Succeeded with unexpected value: $value")
     }
   }
+
+  def expectIllegalArgumentException(result: ConfigResult[Any]): Unit = {
+    result match {
+      case Left(_: IllegalArgumentException) => ()
+      case Left(err)    => fail(s"Failed with unexpected error: $err")
+      case Right(value) => fail(s"Succeeded with unexpected value: $value")
+    }
+  }
 }
