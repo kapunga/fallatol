@@ -35,6 +35,8 @@ class CompositeConfigSuite extends AnyFlatSpec with TestHelpers {
       |    name = "Bob"
       |    age = 42
       |  }]
+      |  trump = "spades"
+      |  typo_suite = "heat"
       |}
       |""".stripMargin
 
@@ -102,5 +104,17 @@ class CompositeConfigSuite extends AnyFlatSpec with TestHelpers {
         )
       )
     )
+  }
+
+  "String mapped ConfigMapper" should "parse correctly" in {
+    val result = config.get[Suit]("trump")
+
+    assert(result == Right(Spades))
+  }
+
+  "String mapped ConfigMapper" should "raise error on parse error" in {
+    val result = config.get[Suit]("typo_suite")
+
+    expectIllegalArgumentException(result)
   }
 }

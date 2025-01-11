@@ -128,7 +128,7 @@
 
 </span><span class="keyword">object</span><span> </span><span class="type-name">Airport</span><span> {
   </span><span class="keyword">implicit</span><span> </span><span class="keyword">val</span><span> </span><span class="identifier">airportConfigMapper</span><span>: </span><span class="type-name">ConfigMapper</span><span>[</span><span class="type-name">Airport</span><span>] =
-    </span><span class="type-name">ConfigMapper</span><span>.</span><span class="identifier">from</span><span>[</span><span class="type-name">Config</span><span>, </span><span class="type-name">Aiport</span><span>](</span><span class="identifier">config</span><span> =&gt;
+    </span><span class="type-name">ConfigMapper</span><span>.</span><span class="identifier">fromConfig</span><span>(</span><span class="identifier">config</span><span> =&gt;
       </span><span class="keyword">for</span><span> {
         </span><span class="identifier">code</span><span> &lt;- </span><span class="identifier">config</span><span>.</span><span class="identifier">get</span><span>[</span><span class="type-name">String</span><span>](</span><span class="string-literal">&quot;code&quot;</span><span>)
         </span><span class="identifier">name</span><span> &lt;- </span><span class="identifier">config</span><span>.</span><span class="identifier">get</span><span>[</span><span class="type-name">String</span><span>](</span><span class="string-literal">&quot;name&quot;</span><span>)
