@@ -10,7 +10,9 @@ case object Spades extends Suit { val name = "spades" }
 
 object Suit {
   implicit val suitConfigMapper: ConfigMapper[Suit] =
-    ConfigMapper.fromString(s => fromString(s).toRight(new IllegalArgumentException(s"Invalid Suit: $s")))
+    ConfigMapper.fromString(s =>
+      fromString(s).toRight(new IllegalArgumentException(s"Invalid Suit: $s"))
+    )
 
   val all: Seq[Suit] = Heart :: Diamond :: Club :: Spades :: Nil
 
