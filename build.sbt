@@ -1,8 +1,8 @@
 import Dependencies.Libraries
-import laika.config.{LinkConfig, SourceLinks, SyntaxHighlighting}
+import laika.config.{ LinkConfig, SourceLinks, SyntaxHighlighting }
 import laika.format.Markdown
 import laika.helium.Helium
-import laika.helium.config.{HeliumIcon, IconLink}
+import laika.helium.config.{ HeliumIcon, IconLink }
 import laika.theme.ThemeProvider
 
 val scala212 = "2.12.20"
@@ -26,36 +26,39 @@ ThisBuild / developers := List(
   )
 )
 
-lazy val helium: ThemeProvider = Helium.defaults
-  .all.metadata(
+lazy val helium: ThemeProvider = Helium.defaults.all
+  .metadata(
     title = Some("Fallatól"),
     language = Some("en")
   )
-  .site.topNavigationBar(
+  .site
+  .topNavigationBar(
     navLinks = Seq(
-      IconLink.external("https://github.com/kapunga/fallatol", HeliumIcon.github),
+      IconLink
+        .external("https://github.com/kapunga/fallatol", HeliumIcon.github)
     )
-  ).build
+  )
+  .build
 
 lazy val root = (project in file("."))
-    .settings(
-      publish / skip := true,
-      name := "fallatol",
-      crossScalaVersions := Nil,
-      description := "A collection of Thor's micro-libraries.",
-      startYear := Some(2024),
-      laikaExtensions ++= Seq(Markdown.GitHubFlavor, SyntaxHighlighting),
-      // Raw site files are `site-docs` since GitHub pages reads from `docs`
-      Laika / sourceDirectories := Seq(file("site-docs")),
-      laikaSite / target := file("docs"),
-      laikaTheme := helium
-    )
-    .enablePlugins(LaikaPlugin)
-    .aggregate(
-      config.js,
-      config.jvm,
-      config.native
-    )
+  .settings(
+    publish / skip := true,
+    name := "fallatol",
+    crossScalaVersions := Nil,
+    description := "A collection of Thor's micro-libraries.",
+    startYear := Some(2024),
+    laikaExtensions ++= Seq(Markdown.GitHubFlavor, SyntaxHighlighting),
+    // Raw site files are `site-docs` since GitHub pages reads from `docs`
+    Laika / sourceDirectories := Seq(file("site-docs")),
+    laikaSite / target := file("docs"),
+    laikaTheme := helium
+  )
+  .enablePlugins(LaikaPlugin)
+  .aggregate(
+    config.js,
+    config.jvm,
+    config.native
+  )
 
 lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Pure)
@@ -67,12 +70,11 @@ lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     libraryDependencies ++= Libraries.cats ++ Libraries.scalaTest ++ Libraries.sconfig
   )
   .jsSettings(
-    crossScalaVersions := scalaVersions,
+    crossScalaVersions := scalaVersions
   )
   .jvmSettings(
-    crossScalaVersions := scalaVersions,
+    crossScalaVersions := scalaVersions
   )
   .nativeSettings(
     crossScalaVersions := scalaVersions
   )
-
