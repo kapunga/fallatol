@@ -13,6 +13,8 @@ jobs:
   scala-steward:
     runs-on: ubuntu-latest
     name: Scala Steward
+    env:
+      JAVA_OPTS: "-Xmx2000M"
     steps:
       - name: Install sbt
         uses: sbt/setup-sbt@v1
