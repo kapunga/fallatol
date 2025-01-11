@@ -47,10 +47,12 @@ object ConfigMapper {
   ): ConfigMapper[B] = cv => acm.get(cv).flatMap(f)
 
   /** Convenience method for `from` a String, since this is a common case */
-  def fromString[A](f: String => ConfigResult[A]): ConfigMapper[A] = from[String, A](f)
+  def fromString[A](f: String => ConfigResult[A]): ConfigMapper[A] =
+    from[String, A](f)
 
   /** Convenience method for `from` a Config, since that is a common case */
-  def fromConfig[A](f: Config => ConfigResult[A]): ConfigMapper[A] = from[Config, A](f)
+  def fromConfig[A](f: Config => ConfigResult[A]): ConfigMapper[A] =
+    from[Config, A](f)
 
   implicit val stringConfigMapper: ConfigMapper[String] = {
     case cs: ConfigString => Right(cs.value)
