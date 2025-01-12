@@ -1,5 +1,5 @@
 import Dependencies.Libraries
-import laika.config.{ LinkConfig, SourceLinks, SyntaxHighlighting }
+import laika.config.SyntaxHighlighting
 import laika.format.Markdown
 import laika.helium.Helium
 import laika.helium.config.{ HeliumIcon, IconLink }
@@ -90,7 +90,11 @@ lazy val ollama = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     description := "A connector for ollama",
     startYear := Some(2024),
     moduleName := "fallatol-ollama",
-    libraryDependencies ++= Libraries.circe
+    libraryDependencies ++=
+      Libraries.cats ++
+        Libraries.circe ++
+      Libraries.sttpClient ++
+        (if (scalaVersion.value == scala3) Seq() else Libraries.circeExtras)
   )
   .dependsOn(config)
   .jsSettings(

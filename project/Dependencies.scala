@@ -4,8 +4,10 @@ object Dependencies {
   object V {
     val cats = "2.13.0"
     val circe = "0.14.10"
+    val circeGenericExtras = "0.14.4"
     val scalaTest = "3.2.19"
     val sconfig = "1.8.1"
+    val sttpClient = "4.0.0-M19"
   }
 
   object Libraries {
@@ -18,10 +20,20 @@ object Dependencies {
       "io.circe" %% "circe-parser" % V.circe
     )
 
+    val circeExtras: Seq[ModuleID] = Seq(
+      "io.circe" %% "circe-generic-extras" % V.circeGenericExtras,
+    )
+
     val scalaTest: Seq[ModuleID] =
       Seq("org.scalatest" %% "scalatest" % V.scalaTest % Test)
 
     val sconfig: Seq[ModuleID] =
       Seq("org.ekrich" %% "sconfig" % V.sconfig)
+
+    val sttpClient: Seq[ModuleID] = Seq(
+      "com.softwaremill.sttp.client4" %% "core" % V.sttpClient,
+      "com.softwaremill.sttp.client4" %% "circe" % V.sttpClient,
+      "com.softwaremill.sttp.client4" %% "fs2" % V.sttpClient
+    )
   }
 }

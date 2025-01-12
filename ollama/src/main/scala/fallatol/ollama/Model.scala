@@ -1,6 +1,8 @@
 package fallatol.ollama
 
 import fallatol.config.ConfigMapper
+import io.circe.syntax.EncoderOps
+import io.circe.{ Decoder, Encoder, HCursor }
 
 trait Model {
   def name: String
@@ -25,4 +27,10 @@ object Model {
 
   implicit val modelConfigMapper: ConfigMapper[Model] =
     ConfigMapper.from[String, Model](c => Right(fromString(c)))
+
+  implicit val decoder: Decoder[Model] =
+    (c: HCursor) => c.as[String].map(fromString)
+
+  implicit val encoder: Encoder[Model] =
+    (m: Model) => m.name.asJson
 }
