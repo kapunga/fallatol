@@ -10,7 +10,7 @@ class Ollama(baseUri: Uri) {
   def chat(request: ChatRequest): OllamaRequest[ChatResponse] =
     basicRequest
       .post(ollamaUris.Chat)
-      .body(request)
+      .body(asJson(request))
       .response(asJson[ChatResponse])
 }
 

@@ -94,6 +94,7 @@ lazy val ollama = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       Libraries.cats ++
         Libraries.circe ++
       Libraries.sttpClient ++
+        Libraries.tapir ++
         (if (scalaVersion.value == scala3) Seq() else Libraries.circeExtras)
   )
   .dependsOn(config)

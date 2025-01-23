@@ -7,7 +7,8 @@ object Dependencies {
     val circeGenericExtras = "0.14.4"
     val scalaTest = "3.2.19"
     val sconfig = "1.8.1"
-    val sttpClient = "4.0.0-M19"
+    val sttpClient = "4.0.0-M22"
+    val tapir = "1.11.12"
   }
 
   object Libraries {
@@ -34,6 +35,13 @@ object Dependencies {
       "com.softwaremill.sttp.client4" %% "core" % V.sttpClient,
       "com.softwaremill.sttp.client4" %% "circe" % V.sttpClient,
       "com.softwaremill.sttp.client4" %% "fs2" % V.sttpClient
+    )
+
+    val tapir: Seq[ModuleID] = Seq(
+      "com.softwaremill.sttp.tapir" %% "tapir-core" % V.tapir,
+      "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % V.tapir,
+      "com.softwaremill.sttp.tapir" %% "tapir-apispec-docs" % V.tapir,
+      "com.softwaremill.sttp.apispec" %% "jsonschema-circe" % "0.11.5"
     )
   }
 }
