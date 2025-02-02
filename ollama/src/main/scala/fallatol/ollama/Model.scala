@@ -9,6 +9,10 @@ trait Model {
 }
 
 object Model {
+  case object DeepseekR1 extends Model {
+    override def name: String = "deepseek-r1"
+  }
+
   case object Gemma2 extends Model {
     override val name = "gemma2"
   }
