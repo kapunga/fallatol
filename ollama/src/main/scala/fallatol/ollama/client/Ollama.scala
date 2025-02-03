@@ -12,8 +12,15 @@ class Ollama(baseUri: Uri) {
       .post(ollamaUris.Chat)
       .body(asJson(request))
       .response(asJson[ChatResponse])
+
+  def embed(request: EmbedRequest): OllamaRequest[EmbedResponse] =
+    basicRequest
+      .post(ollamaUris.Embed)
+      .body(asJson(request))
+      .response(asJson[EmbedResponse])
 }
 
 private class OllamaUris(val baseUri: Uri) {
   val Chat = uri"$baseUri/api/chat"
+  val Embed = uri"$baseUri/api/embed"
 }
