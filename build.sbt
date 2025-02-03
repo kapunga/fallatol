@@ -107,3 +107,5 @@ lazy val ollama = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .nativeSettings(
     crossScalaVersions := scalaVersions
   )
+
+addCommandAlias("formatAll","+scalafmtAll; +scalafixAll; laikaSite; headerCreateAll")
