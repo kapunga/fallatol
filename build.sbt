@@ -12,6 +12,7 @@ val scalaVersions = Seq(scala212, scala213, scala3)
 
 ThisBuild / scalaVersion := scala213
 ThisBuild / organization := "org.kapunga"
+ThisBuild / organizationName := "Paul (Thor) Thordarson"
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 ThisBuild / coverageEnabled := true
