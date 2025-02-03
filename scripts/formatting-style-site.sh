@@ -5,7 +5,7 @@ set -o errexit
 
 set -o xtrace
 
-sbt scalafmtAll; sbt scalafixAll; sbt laikaSite
+sbt scalafmtAll; sbt scalafixAll; sbt laikaSite; sbt headerCheck
 
 MODIFIED=$(git ls-files --modified --exclude-standard)
 if [[ -n "$MODIFIED" ]]; then
