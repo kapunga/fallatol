@@ -27,6 +27,7 @@ import sttp.model.Uri
 trait OllamaClient[F[_]] {
   def chat(request: ChatRequest): F[ChatResponse]
   def embed(request: EmbedRequest): F[EmbedResponse]
+  def tags: F[TagsResponse]
 }
 
 class SyncOllamaClient(baseUri: Uri, backend: SyncBackend)
@@ -38,6 +39,9 @@ class SyncOllamaClient(baseUri: Uri, backend: SyncBackend)
 
   override def embed(request: EmbedRequest): SyncType[EmbedResponse] =
     ollama.embed(request).send(backend).body
+
+  override def tags: SyncType[TagsResponse] =
+    ollama.tags.send(backend).body
 }
 
 object SyncOllamaClient {
