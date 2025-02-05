@@ -90,6 +90,12 @@ lazy val ollama = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     description := "A connector for ollama",
     startYear := Some(2024),
     moduleName := "fallatol-ollama",
+    console / initialCommands :=
+      """
+        |import fallatol.ollama._
+        |import fallatol.ollama.client._
+        |val ollama = SyncOllamaClient()
+        |""".stripMargin,
     libraryDependencies ++=
       Libraries.cats ++
         Libraries.circe ++
