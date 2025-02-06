@@ -6,5 +6,5 @@ _Note: This library is under development and is mostly receiving updates as I ha
 Add to your dependencies:
 
 ```sbt
- libraryDependencies += "org.fallatol" %% "fallatol-ollama" % "0.2.1"
+ libraryDependencies += "org.fallatol" %% "fallatol-ollama" % "0.3.0"
 ```

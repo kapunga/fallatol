@@ -34,9 +34,12 @@ be helpful or would like to see an additional feature that would support your us
 A collection of implicits used with the [_sconfig library_](https://github.com/ekrich/sconfig/), providing a `get`
 method to `Config` that is generic and referentially transparent.
 
+### [_fallatol-ollama_](https://fallatol.kapunga.org/ollama.html)
+
+A prototype library for interacting with [Ollama](https://ollama.com/).
+
 ## Planned Micro-Libraries
 * `fallatol-slack` - Slack connector library
-* `fallatol-llama` - Ollama connector library
 
 ## Name
 _Fallatól_ is a mashup for the Icelandic words _['fall'](https://en.wiktionary.org/wiki/fall#Icelandic)_ meaning a function in programming, and _[tól](https://en.wiktionary.org/wiki/t%C3%B3l#Icelandic)_
