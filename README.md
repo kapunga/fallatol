@@ -24,10 +24,6 @@ Main documentation is located [here](https://fallatol.kapunga.org).
 A collection of implicits used with the [_sconfig library_](https://github.com/ekrich/sconfig/), providing a `get`
 method to `Config` that is generic and referentially transparent.
 
-### [_fallatol-ollama_](https://fallatol.kapunga.org/ollama.html)
-
-A prototype library for interacting with [Ollama](https://ollama.com/).
-
 ### Quickstart
 
 Add to your project's `build.sbt`:
@@ -57,4 +53,35 @@ def loadConfig = {
     age <- config.get[Int]("age")
   } yield (origin, destination)
 }
+```
+
+### [_fallatol-ollama_](https://fallatol.kapunga.org/ollama.html)
+
+A prototype library for interacting with [Ollama](https://ollama.com/).
+
+### Quickstart
+
+Add to your project's `build.sbt`:
+```sbt
+libraryDependencies += "org.fallatol" %% "fallatol-ollama" % "0.3.0"
+```
+
+Read some configs:
+```scala
+import fallatol.ollama._
+import fallatol.ollama.client._
+
+// Create a client
+val ollama = SyncOllamaClient()
+
+// Use a client
+val chatRequest = ChatRequest(Model.Llama3_2, Seq(Message.User("Say 'Hello World' but as a haiku.")))
+
+val response = ollama.chat(chatRequest)
+
+response.foreach(r => println(r.message.content))
+
+// World, I greet you now
+// Digital words dance with joy
+// Hello, you are here,
 ```

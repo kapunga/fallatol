@@ -88,11 +88,30 @@
       <main class="content">
 
         <h1 id="fallatól-ollama" class="title">Fallatól Ollama</h1>
-        <p><em>Note: This library is under development and is mostly receiving updates as I have need of the provided functionality.</em></p>
+        <p>A prototype library for interacting with <a href="https://ollama.com/">Ollama</a>.</p>
+        <p><em>Note: This library is under development and is mostly receiving updates as I have need of the provided functionality.
+        Feature requests are more than welcome!</em></p>
         
-        <h2 id="quickstart" class="section"><a class="anchor-link left" href="#quickstart"><i class="icofont-laika link">&#xef71;</i></a>Quickstart</h2>
-        <p>Add to your dependencies:</p>
-        <pre class="keep-together pdf epub"><code class="sbt"> libraryDependencies += &quot;org.fallatol&quot; %% &quot;fallatol-ollama&quot; % &quot;0.3.0&quot;</code></pre>
+        <h3 id="quickstart" class="section"><a class="anchor-link left" href="#quickstart"><i class="icofont-laika link">&#xef71;</i></a>Quickstart</h3>
+        <p>Add to your project&#39;s <code>build.sbt</code>:</p>
+        <pre class="keep-together pdf epub"><code class="sbt">libraryDependencies += &quot;org.fallatol&quot; %% &quot;fallatol-ollama&quot; % &quot;0.3.0&quot;</code></pre>
+        <p>Read some configs:</p>
+        <pre><code class="nohighlight"><span class="keyword">import</span><span> </span><span class="identifier">fallatol</span><span>.</span><span class="identifier">ollama</span><span>.</span><span class="identifier">_</span><span>
+</span><span class="keyword">import</span><span> </span><span class="identifier">fallatol</span><span>.</span><span class="identifier">ollama</span><span>.</span><span class="identifier">client</span><span>.</span><span class="identifier">_</span><span>
+
+</span><span class="comment">// Create a client
+</span><span class="keyword">val</span><span> </span><span class="identifier">ollama</span><span> = </span><span class="type-name">SyncOllamaClient</span><span>()
+
+</span><span class="comment">// Use a client
+</span><span class="keyword">val</span><span> </span><span class="identifier">chatRequest</span><span> = </span><span class="type-name">ChatRequest</span><span>(</span><span class="type-name">Model</span><span>.</span><span class="type-name">Llama3_2</span><span>, </span><span class="type-name">Seq</span><span>(</span><span class="type-name">Message</span><span>.</span><span class="type-name">User</span><span>(</span><span class="string-literal">&quot;Say &#39;Hello World&#39; but as a haiku.&quot;</span><span>)))
+
+</span><span class="keyword">val</span><span> </span><span class="identifier">response</span><span> = </span><span class="identifier">ollama</span><span>.</span><span class="identifier">chat</span><span>(</span><span class="identifier">chatRequest</span><span>)
+
+</span><span class="identifier">response</span><span>.</span><span class="identifier">foreach</span><span>(</span><span class="identifier">r</span><span> =&gt; </span><span class="identifier">println</span><span>(</span><span class="identifier">r</span><span>.</span><span class="identifier">message</span><span>.</span><span class="identifier">content</span><span>))
+
+</span><span class="comment">// World, I greet you now
+// Digital words dance with joy
+// Hello, you are here,</span></code></pre>
 
         
 <hr class="footer-rule"/>
