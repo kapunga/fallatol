@@ -24,11 +24,15 @@ Main documentation is located [here](https://fallatol.kapunga.org).
 A collection of implicits used with the [_sconfig library_](https://github.com/ekrich/sconfig/), providing a `get`
 method to `Config` that is generic and referentially transparent.
 
+### [_fallatol-ollama_](https://fallatol.kapunga.org/ollama.html)
+
+A prototype library for interacting with [Ollama](https://ollama.com/).
+
 ### Quickstart
 
 Add to your project's `build.sbt`:
 ```sbt
-libraryDependencies += "org.fallatol" %% "fallatol-config" % "0.1.1"
+libraryDependencies += "org.fallatol" %% "fallatol-config" % "0.3.0"
 ```
 Read some configs:
 ```scala

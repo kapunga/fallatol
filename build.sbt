@@ -1,5 +1,5 @@
 import Dependencies.Libraries
-import laika.config.{ LinkConfig, SourceLinks, SyntaxHighlighting }
+import laika.config.SyntaxHighlighting
 import laika.format.Markdown
 import laika.helium.Helium
 import laika.helium.config.{ HeliumIcon, IconLink }
@@ -58,7 +58,10 @@ lazy val root = (project in file("."))
   .aggregate(
     config.js,
     config.jvm,
-    config.native
+    config.native,
+    ollama.js,
+    ollama.jvm,
+    ollama.native
   )
 
 lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
@@ -79,3 +82,36 @@ lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .nativeSettings(
     crossScalaVersions := scalaVersions
   )
+
+lazy val ollama = crossProject(JSPlatform, JVMPlatform, NativePlatform)
+  .crossType(CrossType.Pure)
+  .in(file("ollama"))
+  .settings(
+    description := "A connector for ollama",
+    startYear := Some(2024),
+    moduleName := "fallatol-ollama",
+    console / initialCommands :=
+      """
+        |import fallatol.ollama._
+        |import fallatol.ollama.client._
+        |val ollama = SyncOllamaClient()
+        |""".stripMargin,
+    libraryDependencies ++=
+      Libraries.cats ++
+        Libraries.circe ++
+      Libraries.sttpClient ++
+        Libraries.tapir ++
+        (if (scalaVersion.value == scala3) Seq() else Libraries.circeExtras)
+  )
+  .dependsOn(config)
+  .jsSettings(
+    crossScalaVersions := scalaVersions,
+  )
+  .jvmSettings(
+    crossScalaVersions := scalaVersions,
+  )
+  .nativeSettings(
+    crossScalaVersions := scalaVersions
+  )
+
+addCommandAlias("formatAll","+scalafmtAll; +scalafixAll; laikaSite; headerCreateAll")
