@@ -39,11 +39,8 @@ trait OllamaClient[F[_]] {
     val loadRequest = ChatRequest(model, Seq.empty, keepAlive = keepAlive)
     chat(loadRequest).void
   }
-  def unload(model: Model)(implicit mt: MonadThrow[F]): F[Unit] = {
-    val unloadRequest =
-      ChatRequest(model, Seq.empty, keepAlive = Some(Duration.Zero))
-    chat(unloadRequest).void
-  }
+  def unload(model: Model)(implicit mt: MonadThrow[F]): F[Unit] =
+    load(model, keepAlive = Some(Duration.Zero))
 }
 
 class SyncOllamaClient(baseUri: Uri, backend: SyncBackend)
