@@ -21,6 +21,8 @@
 
 package fallatol.ollama.client
 
+import scala.concurrent.duration.Duration
+
 import fallatol.ollama.{ Message, Model }
 import io.circe.Codec
 
@@ -29,7 +31,8 @@ import io.circe.Codec
 case class ChatRequest(
     model: Model,
     messages: Seq[Message],
-    stream: Boolean = false
+    stream: Boolean = false,
+    keepAlive: Option[Duration] = None
 )
 
 object ChatRequest {

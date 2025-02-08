@@ -21,6 +21,11 @@
 
 package fallatol.ollama.client
 
+import scala.concurrent.duration.Duration
+
+import cats.MonadThrow
+import cats.syntax.all._
+import fallatol.ollama.Model
 import sttp.client4._
 import sttp.model.Uri
 
@@ -28,6 +33,17 @@ trait OllamaClient[F[_]] {
   def chat(request: ChatRequest): F[ChatResponse]
   def embed(request: EmbedRequest): F[EmbedResponse]
   def tags: F[TagsResponse]
+  def load(model: Model, keepAlive: Option[Duration] = None)(implicit
+      mt: MonadThrow[F]
+  ): F[Unit] = {
+    val loadRequest = ChatRequest(model, Seq.empty, keepAlive = keepAlive)
+    chat(loadRequest).void
+  }
+  def unload(model: Model)(implicit mt: MonadThrow[F]): F[Unit] = {
+    val unloadRequest =
+      ChatRequest(model, Seq.empty, keepAlive = Some(Duration.Zero))
+    chat(unloadRequest).void
+  }
 }
 
 class SyncOllamaClient(baseUri: Uri, backend: SyncBackend)
