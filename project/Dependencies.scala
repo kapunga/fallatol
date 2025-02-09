@@ -7,7 +7,7 @@ object Dependencies {
     val circeGenericExtras = "0.14.4"
     val scalaTest = "3.2.19"
     val sconfig = "1.8.1"
-    val sttpClient = "4.0.0-M22"
+    val sttpClient = "4.0.0-RC1"
     val tapir = "1.11.12"
   }
 
@@ -22,7 +22,7 @@ object Dependencies {
     )
 
     val circeExtras: Seq[ModuleID] = Seq(
-      "io.circe" %% "circe-generic-extras" % V.circeGenericExtras,
+      "io.circe" %% "circe-generic-extras" % V.circeGenericExtras
     )
 
     val scalaTest: Seq[ModuleID] =
