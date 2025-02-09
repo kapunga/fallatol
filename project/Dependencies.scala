@@ -22,7 +22,7 @@ object Dependencies {
     )
 
     val circeExtras: Seq[ModuleID] = Seq(
-      "io.circe" %% "circe-generic-extras" % V.circeGenericExtras,
+      "io.circe" %% "circe-generic-extras" % V.circeGenericExtras
     )
 
     val scalaTest: Seq[ModuleID] =
@@ -41,7 +41,7 @@ object Dependencies {
       "com.softwaremill.sttp.tapir" %% "tapir-core" % V.tapir,
       "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % V.tapir,
       "com.softwaremill.sttp.tapir" %% "tapir-apispec-docs" % V.tapir,
-      "com.softwaremill.sttp.apispec" %% "jsonschema-circe" % "0.11.5"
+      "com.softwaremill.sttp.apispec" %% "jsonschema-circe" % "0.11.7"
     )
   }
 }
