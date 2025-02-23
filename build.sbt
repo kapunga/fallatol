@@ -99,19 +99,22 @@ lazy val ollama = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     libraryDependencies ++=
       Libraries.cats ++
         Libraries.circe ++
-      Libraries.sttpClient ++
+        Libraries.sttpClient ++
         Libraries.tapir ++
         (if (scalaVersion.value == scala3) Seq() else Libraries.circeExtras)
   )
   .dependsOn(config)
   .jsSettings(
-    crossScalaVersions := scalaVersions,
+    crossScalaVersions := scalaVersions
   )
   .jvmSettings(
-    crossScalaVersions := scalaVersions,
+    crossScalaVersions := scalaVersions
   )
   .nativeSettings(
     crossScalaVersions := scalaVersions
   )
 
-addCommandAlias("formatAll","+scalafmtAll; +scalafixAll; laikaSite; headerCreateAll")
+addCommandAlias(
+  "formatAll",
+  "+scalafmtAll; +scalafixAll; laikaSite; headerCreateAll"
+)
