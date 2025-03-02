@@ -61,7 +61,10 @@ lazy val root = (project in file("."))
     config.native,
     ollama.js,
     ollama.jvm,
-    ollama.native
+    ollama.native,
+    slack.js,
+    slack.jvm,
+    slack.native
   )
 
 lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
@@ -101,6 +104,29 @@ lazy val ollama = crossProject(JSPlatform, JVMPlatform, NativePlatform)
         Libraries.circe ++
         Libraries.sttpClient ++
         Libraries.tapir ++
+        (if (scalaVersion.value == scala3) Seq() else Libraries.circeExtras)
+  )
+  .dependsOn(config)
+  .jsSettings(
+    crossScalaVersions := scalaVersions
+  )
+  .jvmSettings(
+    crossScalaVersions := scalaVersions
+  )
+  .nativeSettings(
+    crossScalaVersions := scalaVersions
+  )
+
+lazy val slack = crossProject(JSPlatform, JVMPlatform, NativePlatform)
+  .crossType(CrossType.Pure)
+  .in(file("slack"))
+  .settings(
+    description := "A connector for slack",
+    startYear := Some(2025),
+    moduleName := "fallatol-slack",
+    libraryDependencies ++=
+      Libraries.cats ++
+      Libraries.circe ++
         (if (scalaVersion.value == scala3) Seq() else Libraries.circeExtras)
   )
   .dependsOn(config)
