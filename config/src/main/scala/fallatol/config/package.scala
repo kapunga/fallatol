@@ -21,7 +21,9 @@
 
 package fallatol
 
-import org.ekrich.config.Config
+import cats._
+import cats.implicits._
+import org.ekrich.config.{ Config, ConfigFactory }
 
 /** Provides type classes for extracting values in a generic manner from HOCON
   * config files read by the library
@@ -59,5 +61,13 @@ package object config {
       if (config.hasPath(path) && !config.getIsNull(path)) cf.get(config, path)
       else Right(default)
     }
+
+    final def withFallbackF[F[_]: MonadThrow](fallback: F[Config]): F[Config] =
+      fallback.map(fb => config.withFallback(fb))
+  }
+
+  implicit class ConfigLoadOps(configFactory: ConfigFactory.type) {
+    final def loadF[F[_]: MonadThrow](resourceBasename: String): F[Config] =
+      MonadThrow[F].catchNonFatal(configFactory.load(resourceBasename))
   }
 }
