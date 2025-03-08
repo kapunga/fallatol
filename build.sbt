@@ -59,6 +59,9 @@ lazy val root = (project in file("."))
     config.js,
     config.jvm,
     config.native,
+    kagi.js,
+    kagi.jvm,
+    kagi.native,
     ollama.js,
     ollama.jvm,
     ollama.native
@@ -73,6 +76,34 @@ lazy val config = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     moduleName := "fallatol-config",
     libraryDependencies ++= Libraries.cats ++ Libraries.scalaTest ++ Libraries.sconfig
   )
+  .jsSettings(
+    crossScalaVersions := scalaVersions
+  )
+  .jvmSettings(
+    crossScalaVersions := scalaVersions
+  )
+  .nativeSettings(
+    crossScalaVersions := scalaVersions
+  )
+
+lazy val kagi = crossProject(JSPlatform, JVMPlatform, NativePlatform)
+  .crossType(CrossType.Pure)
+  .in(file("kagi"))
+  .settings(
+    description := "A connector for the Kagi API",
+    startYear := Some(2025),
+    moduleName := "fallatol-kagi",
+    console / initialCommands :=
+      """
+        |import fallatol.kagi._
+        |import fallatol.kagi.client._
+        |""".stripMargin,
+    libraryDependencies ++=
+      Libraries.cats ++
+        Libraries.circe ++
+        Libraries.sttpClient ++
+        Libraries.tapir ++
+        (if (scalaVersion.value == scala3) Seq() else Libraries.circeExtras))
   .jsSettings(
     crossScalaVersions := scalaVersions
   )
