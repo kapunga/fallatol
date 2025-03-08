@@ -147,5 +147,5 @@ lazy val ollama = crossProject(JSPlatform, JVMPlatform, NativePlatform)
 
 addCommandAlias(
   "formatAll",
-  "+scalafmtAll; +scalafixAll; laikaSite; headerCreateAll"
+  "+scalafmtAll; +scalafixAll; laikaSite; +headerCreateAll"
 )
