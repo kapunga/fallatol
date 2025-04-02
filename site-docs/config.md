@@ -6,14 +6,14 @@ _Note: This is very much a work in progress._
 Add to your dependencies:
 
 ```sbt
- libraryDependencies += "org.fallatol" %% "fallatol-config" % "0.3.0"
+ libraryDependencies += "org.kapunga" %% "fallatol-config" % "0.3.1"
 ```
 
 Since `fallatol-config` is intended to work with [`sconfig`](https://github.com/ekrich/sconfig/) so you may also want to add it to your dependencies as
 well:
 
 ```sbt
-libraryDependencies += "org.ekrich" %% "sconfig" % "1.8.1"
+libraryDependencies += "org.ekrich" %% "sconfig" % "1.9.0"
 ```
 
 ### Example Usage

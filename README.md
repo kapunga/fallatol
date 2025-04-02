@@ -28,7 +28,7 @@ method to `Config` that is generic and referentially transparent.
 
 Add to your project's `build.sbt`:
 ```sbt
-libraryDependencies += "org.fallatol" %% "fallatol-config" % "0.3.0"
+libraryDependencies += "org.kapunga" %% "fallatol-config" % "0.3.1"
 ```
 Read some configs:
 ```scala
@@ -63,7 +63,7 @@ A prototype library for interacting with [Ollama](https://ollama.com/).
 
 Add to your project's `build.sbt`:
 ```sbt
-libraryDependencies += "org.fallatol" %% "fallatol-ollama" % "0.3.0"
+libraryDependencies += "org.kapunga" %% "fallatol-ollama" % "0.3.1"
 ```
 
 Read some configs:

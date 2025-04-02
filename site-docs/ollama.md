@@ -10,7 +10,7 @@ Feature requests are more than welcome!_
 
 Add to your project's `build.sbt`:
 ```sbt
-libraryDependencies += "org.fallatol" %% "fallatol-ollama" % "0.3.0"
+libraryDependencies += "org.kapunga" %% "fallatol-ollama" % "0.3.1"
 ```
 
 Read some configs:
