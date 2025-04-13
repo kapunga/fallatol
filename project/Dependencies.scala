@@ -41,7 +41,7 @@ object Dependencies {
       "com.softwaremill.sttp.tapir" %% "tapir-core" % V.tapir,
       "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % V.tapir,
       "com.softwaremill.sttp.tapir" %% "tapir-apispec-docs" % V.tapir,
-      "com.softwaremill.sttp.apispec" %% "jsonschema-circe" % "0.11.7"
+      "com.softwaremill.sttp.apispec" %% "jsonschema-circe" % "0.11.8"
     )
   }
 }
