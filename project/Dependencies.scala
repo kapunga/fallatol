@@ -7,7 +7,7 @@ object Dependencies {
     val circeGenericExtras = "0.14.4"
     val scalaTest = "3.2.19"
     val sconfig = "1.9.0"
-    val sttpClient = "4.0.0-RC4"
+    val sttpClient = "4.0.6"
     val tapir = "1.11.20"
   }
 
