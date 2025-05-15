@@ -2,8 +2,9 @@ import Dependencies.Libraries
 import laika.config.SyntaxHighlighting
 import laika.format.Markdown
 import laika.helium.Helium
-import laika.helium.config.{ HeliumIcon, IconLink }
+import laika.helium.config.{HeliumIcon, IconLink}
 import laika.theme.ThemeProvider
+import laika.theme.config.{Font, FontDefinition, FontStyle, FontWeight}
 
 val scala212 = "2.12.20"
 val scala213 = "2.13.16"
@@ -27,6 +28,8 @@ ThisBuild / developers := List(
   )
 )
 
+lazy val fontPath = "fonts"
+
 lazy val helium: ThemeProvider = Helium.defaults.all
   .metadata(
     title = Some("Fallatól"),
@@ -38,8 +41,22 @@ lazy val helium: ThemeProvider = Helium.defaults.all
       IconLink
         .external("https://github.com/kapunga/fallatol", HeliumIcon.github)
     )
-  )
-  .build
+  ).all.addFontResources(
+    FontDefinition(
+      Font
+        .withEmbeddedResource(fontPath + "ComicMono/ComicMono.ttf"),
+      "ComicMono", FontWeight.Normal, FontStyle.Normal
+    ),
+    FontDefinition(
+      Font
+        .withEmbeddedResource(fontPath + "ComicMono/ComicMono-Bold.ttf"),
+      "ComicMono", FontWeight.Bold, FontStyle.Normal
+    ),
+  ).all.fontFamilies(
+    body = "Lato",
+    headlines = "Lato",
+    code = "ComicMono"
+  ).build
 
 lazy val root = (project in file("."))
   .settings(
