@@ -3,7 +3,7 @@ import sbt.*
 object Dependencies {
   object V {
     val cats = "2.13.0"
-    val circe = "0.14.12"
+    val circe = "0.14.13"
     val circeGenericExtras = "0.14.4"
     val scalaTest = "3.2.19"
     val sconfig = "1.9.0"
