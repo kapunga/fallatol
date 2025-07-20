@@ -8,7 +8,7 @@ object Dependencies {
     val scalaTest = "3.2.19"
     val sconfig = "1.9.1"
     val sttpClient = "4.0.9"
-    val tapir = "1.11.36"
+    val tapir = "1.11.37"
   }
 
   object Libraries {
