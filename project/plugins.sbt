@@ -12,4 +12,4 @@ addSbtPlugin("org.typelevel" % "laika-sbt" % "1.3.2")
 
 addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.11.1")
 
-addSbtPlugin("de.heikoseeberger" % "sbt-header" % "5.10.0")
+addSbtPlugin("com.github.sbt" % "sbt-header" % "5.11.0")
